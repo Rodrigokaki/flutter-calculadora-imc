@@ -22,12 +22,12 @@ class _IMCPageState extends State<IMCPage> {
     }
 
     if (peso < AppValueLimits.minPeso || peso > AppValueLimits.maxPeso) {
-      setState(() => resultado = "Peso inválido. Deve ser entre $AppValueLimits.minPeso kg e $AppValueLimits.maxPeso kg.");
+      setState(() => resultado = "Peso inválido. Deve ser entre ${AppValueLimits.minPeso} kg e ${AppValueLimits.maxPeso} kg.");
       return;
     }
 
     if (alturaCm < AppValueLimits.minAltura || alturaCm > AppValueLimits.maxAltura) {
-      setState(() => resultado = "Altura inválida. Deve ser entre $AppValueLimits.minAltura cm e $AppValueLimits.maxAltura cm.");
+      setState(() => resultado = "Altura inválida. Deve ser entre ${AppValueLimits.minAltura} cm e ${AppValueLimits.maxAltura} cm.");
       return;
     }
 
