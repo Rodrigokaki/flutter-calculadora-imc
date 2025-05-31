@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'styles.dart';
-import 'value_controller.dart';
+import '../styles/styles.dart';
+import '../constants/constants.dart';
 
 class IMCPage extends StatefulWidget {
   @override
@@ -21,13 +21,13 @@ class _IMCPageState extends State<IMCPage> {
       return;
     }
 
-    if (peso < minPeso || peso > maxPeso) {
-      setState(() => resultado = "Peso inválido. Deve ser entre $minPeso kg e $maxPeso kg.");
+    if (peso < AppValueLimits.minPeso || peso > AppValueLimits.maxPeso) {
+      setState(() => resultado = "Peso inválido. Deve ser entre $AppValueLimits.minPeso kg e $AppValueLimits.maxPeso kg.");
       return;
     }
 
-    if (alturaCm < minAltura || alturaCm > maxAltura) {
-      setState(() => resultado = "Altura inválida. Deve ser entre $minAltura cm e $maxAltura cm.");
+    if (alturaCm < AppValueLimits.minAltura || alturaCm > AppValueLimits.maxAltura) {
+      setState(() => resultado = "Altura inválida. Deve ser entre $AppValueLimits.minAltura cm e $AppValueLimits.maxAltura cm.");
       return;
     }
 
@@ -35,19 +35,19 @@ class _IMCPageState extends State<IMCPage> {
     final imc = peso / (alturaM * alturaM);
 
     String classificacao;
-    if (imc < imcMagrezaGrave) {
+    if (imc < AppIMCValues.imcMagrezaGrave) {
       classificacao = "Magreza grave";
-    } else if (imc < imcMagrezaModerada) {
+    } else if (imc < AppIMCValues.imcMagrezaModerada) {
       classificacao = "Magreza moderada";
-    } else if (imc < imcMagrezaLeve) {
+    } else if (imc < AppIMCValues.imcMagrezaLeve) {
       classificacao = "Magreza leve";
-    } else if (imc <= imcPesoIdeal) {
+    } else if (imc <= AppIMCValues.imcPesoIdeal) {
       classificacao = "Peso ideal";
-    } else if (imc <= imcSobrepeso) {
+    } else if (imc <= AppIMCValues.imcSobrepeso) {
       classificacao = "Sobrepeso";
-    } else if (imc <= imcObesidade1) {
+    } else if (imc <= AppIMCValues.imcObesidade1) {
       classificacao = "Obesidade grau 1";
-    } else if (imc <= imcObesidade2) {
+    } else if (imc <= AppIMCValues.imcObesidade2) {
       classificacao = "Obesidade grau 2";
     } else {
       classificacao = "Obesidade grau 3";
@@ -61,44 +61,41 @@ class _IMCPageState extends State<IMCPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Calculadora IMC")),
+      appBar: AppBar(title: Center(child: Text("Calculadora IMC"))),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(AppSpacing.defaultPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(Icons.person, size: 130, color: primaryColor),
-            SizedBox(height: 20),
+            Icon(Icons.person, size: 130, color: AppColors.primaryColor),
+            SizedBox(height: AppSpacing.spaceBetween),
             TextField(
               controller: pesoController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: "Peso (kg)",
-                labelStyle: TextStyle(color: primaryColor),
+                labelStyle: AppTextStyles.inputLabelStyle,
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppSpacing.spaceBetween),
             TextField(
               controller: alturaController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: "Altura (cm)",
-                labelStyle: TextStyle(color: primaryColor),
+                labelStyle: AppTextStyles.inputLabelStyle,
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: AppSpacing.spaceBetween),
             ElevatedButton(
               onPressed: calcularIMC,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                minimumSize: Size(double.infinity, 50),
-              ),
-              child: Text("Calcular", style: TextStyle(fontSize: 18)),
+              style: AppTextStyles.buttonStyle,
+              child: Text("Calcular", style: AppTextStyles.buttonTextStyles),
             ),
-            SizedBox(height: 20),
-            Text(resultado, style: resultTextStyle, textAlign: TextAlign.center),
+            SizedBox(height: AppSpacing.spaceBetween),
+            Text(resultado, style: AppTextStyles.resultTextStyle, textAlign: TextAlign.center),
           ],
         ),
       ),

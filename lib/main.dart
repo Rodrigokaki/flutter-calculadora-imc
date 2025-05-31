@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'imc_page.dart';
+import 'views/imc_page.dart';
 
 void main() {
   runApp(CalculadoraIMCApp());
